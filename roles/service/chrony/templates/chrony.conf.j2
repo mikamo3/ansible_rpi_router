@@ -4,4 +4,4 @@ server {{ server }} iburst minpoll 8 maxpoll 14
 
 makestep 1.0 3
 deny all
-allow {{ network.networkaddress }}/{{ network.subnet }}
+allow {{ ipv4.networkaddress }}/{{ ipv4.prefix }}
