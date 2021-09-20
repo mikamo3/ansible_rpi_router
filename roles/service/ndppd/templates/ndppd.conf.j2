@@ -1,0 +1,11 @@
+proxy {{ network.interface.wan }} {
+   router no
+   timeout 500
+   autowire yes
+   keepalive yes
+   retries 3
+   ttl 30000
+   rule {{ secret.ip6address }} {
+      iface {{ network.interface.bridge }}
+   }
+}

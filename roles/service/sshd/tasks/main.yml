@@ -1,0 +1,26 @@
+---
+- block:
+    - name: install
+      pacman:
+        name: openssh
+    - name: configure
+      template:
+        src: sshd_config.j2
+        dest: /etc/ssh/sshd_config
+        mode: "0644"
+    - name: create override directory
+      file:
+        path: /etc/systemd/system/sshd.service.d
+        state: directory
+    - name: override sshd.service
+      copy:
+        src: override.conf
+        dest: /etc/systemd/system/sshd.service.d/override.conf
+        mode: "0644"
+    - name: enable
+      systemd:
+        name: sshd
+        enabled: yes
+  tags:
+    - service
+    - sshd

@@ -1,0 +1,13 @@
+[Match]
+Name={{ network.interface.wan }}
+
+[Link]
+RequiredForOnline=yes
+
+[Network]
+DHCP=no
+DNSSEC=no
+DNS={{ network.dns }}
+IPv6AcceptRA=yes
+Address={{ secret.ip6address }}/64
+Tunnel=ip6tun

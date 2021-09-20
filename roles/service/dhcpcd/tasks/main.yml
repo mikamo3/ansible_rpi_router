@@ -1,0 +1,13 @@
+---
+- block:
+    - name: Populate service facts
+      service_facts:
+    - name: disable
+      systemd:
+        name: dhcpcd
+        enabled: no
+        state: stopped
+      when: "'dhcpcd' in services"
+  tags:
+    - service
+    - dhcpcd

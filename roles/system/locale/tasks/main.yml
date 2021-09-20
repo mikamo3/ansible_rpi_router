@@ -1,0 +1,18 @@
+- block:
+    - name: configure locale.gen
+      template:
+        src: locale.gen.j2
+        dest: /etc/locale.gen
+        mode: 0644
+      register: configure_locale_gen
+    - name: generate locale
+      command: locale-gen
+      when: configure_locale_gen.changed
+    - name: configure locale.conf
+      template:
+        src: locale.conf.j2
+        dest: /etc/locale.conf
+        mode: 0644
+  tags:
+    - system
+    - locale

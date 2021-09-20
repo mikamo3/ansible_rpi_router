@@ -1,0 +1,10 @@
+interface {{ network.interface.bridge }} {
+        AdvSendAdvert on;
+        MinRtrAdvInterval 3;
+        MaxRtrAdvInterval 10;
+        prefix {{ secret.ip6networkaddress }} {
+                AdvOnLink on;
+                AdvAutonomous on;
+                AdvRouterAddr on;
+        };
+};

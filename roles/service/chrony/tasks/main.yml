@@ -1,0 +1,18 @@
+---
+- block:
+    - name: install
+      pacman:
+        name: chrony
+    - name: configure
+      template:
+        src: chrony.conf.j2
+        dest: /etc/chrony.conf
+        mode: "0644"
+    - name: enable
+      service:
+        name: chronyd
+        enabled: yes
+  tags:
+    - service
+    - ntp
+    - chrony

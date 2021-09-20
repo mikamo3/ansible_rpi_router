@@ -1,0 +1,29 @@
+- block:
+    - name: configure mirrorlist
+      template:
+        src: "mirrorlist.j2"
+        dest: "/etc/pacman.d/mirrorlist"
+        mode: "0644"
+
+    - name: update pacman cache
+      pacman:
+        update_cache: yes
+      changed_when: False
+
+    - name: install packages
+      pacman:
+        name:
+          - base
+          - base-devel
+          - archlinux-keyring
+          - inetutils
+          - pacman-contrib
+          - net-tools
+          - git
+          - vim
+          - tcpdump
+          - iperf
+
+  tags:
+    - system
+    - package

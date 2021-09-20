@@ -1,0 +1,17 @@
+---
+- block:
+    - name: install
+      pacman:
+        name: nftables
+    - name: configure
+      template:
+        src: nftables.conf.j2
+        dest: /etc/nftables.conf
+        mode: "0644"
+    - name: enable
+      service:
+        name: nftables
+        enabled: yes
+  tags:
+    - service
+    - nftables

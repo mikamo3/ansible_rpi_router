@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+modprobe ip6_tunnel
+ip link set up {{network.interface.wan}}
+REMOTE_ADDR={{secret.ip6tunnel.remote_address}}
+LOCAL_ADDR={{secret.ip6address}}
+
+if [[ $LOCAL_ADDR != "" ]];then
+  echo "
+tunnel add {{network.interface.ip6tunnel}} mode ipip6 remote $REMOTE_ADDR local $LOCAL_ADDR encaplimit none dev {{network.interface.wan}}
+link set dev {{network.interface.ip6tunnel}} up
+route add default dev {{network.interface.ip6tunnel}}" >/var/tmp/ip6tunnel_up
+else
+  echo "
+route add default via {{network.address}}" >/var/tmp/ip6tunnel_up
+fi

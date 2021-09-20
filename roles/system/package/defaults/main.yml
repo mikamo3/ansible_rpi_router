@@ -1,0 +1,6 @@
+---
+pacman:
+  mirrors:
+    - http://tw.mirror.archlinuxarm.org
+    - http://tw2.mirror.archlinuxarm.org
+    - http://mirror.archlinuxarm.org

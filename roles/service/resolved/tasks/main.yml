@@ -1,0 +1,14 @@
+---
+- block:
+    - name: configure
+      template:
+        src: resolved.conf.j2
+        dest: "/etc/systemd/resolved.conf"
+        mode: "0644"
+    - name: enable
+      service:
+        name: systemd-resolved
+        enabled: yes
+  tags:
+    - service
+    - resolved

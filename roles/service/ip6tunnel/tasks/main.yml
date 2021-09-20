@@ -1,0 +1,12 @@
+---
+- name: copy scripts
+  template:
+    src: "{{ item }}.j2"
+    dest: "/usr/local/bin/{{ item }}"
+    mode: "0755"
+  with_items:
+    - ip6tunnel_up
+    - ip6tunnel_down
+  tags:
+    - service
+    - ip6tunnel

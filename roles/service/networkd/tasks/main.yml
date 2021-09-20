@@ -1,0 +1,37 @@
+---
+- block:
+    - name: delete default config
+      file:
+        path: /etc/systemd/network/{{ item }}
+        state: absent
+      with_items:
+        - eth.network
+    - name: create override directory
+      file:
+        path: /etc/systemd/system/systemd-networkd.service.d
+        state: directory
+    - name: override systemd-networkd.service
+      copy:
+        src: override.conf
+        dest: /etc/systemd/system/systemd-networkd.service.d/override.conf
+        mode: "0644"
+    - name: configure
+      template:
+        src: "{{ item }}.j2"
+        dest: "/etc/systemd/network/{{ item }}"
+        mode: "0644"
+      with_items:
+        - bridge.netdev
+        - bridge.network
+        - lan.network
+        - wan.network
+        - tunnel.network
+        - tunnel.netdev
+    - name: enable
+      service:
+        name: systemd-networkd.service
+        enabled: yes
+
+  tags:
+    - service
+    - networkd

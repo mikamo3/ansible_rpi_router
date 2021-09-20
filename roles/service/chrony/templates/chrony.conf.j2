@@ -1,0 +1,7 @@
+{% for server in chrony.servers %}
+server {{ server }} iburst minpoll 8 maxpoll 14
+{% endfor %}
+
+makestep 1.0 3
+deny all
+allow {{ network.networkaddress }}/{{ network.subnet }}

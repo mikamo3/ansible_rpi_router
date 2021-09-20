@@ -1,0 +1,15 @@
+[Unit]
+Description=ds-lite
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/ip6tunnel_up
+ExecStart=/usr/bin/ip -b /var/tmp/ip6tunnel_up
+ExecStop=/usr/local/bin/ip6tunnel_down
+ExecStop=/usr/bin/ip -b /var/tmp/ip6tunnel_down
+User=root
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

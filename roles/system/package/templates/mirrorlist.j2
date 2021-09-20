@@ -1,0 +1,3 @@
+{% for mirror in pacman.mirrors %}
+Server = {{ mirror }}/$arch/$repo
+{% endfor %}

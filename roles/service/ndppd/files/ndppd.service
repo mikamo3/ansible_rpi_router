@@ -1,0 +1,11 @@
+[Unit]
+Description=NDP Proxy Daemon
+After=network.target
+
+[Service]
+ExecStart=/usr/local/sbin/ndppd -d -p /var/run/ndppd.pid
+Type=forking
+PIDFile=/var/run/ndppd.pid
+
+[Install]
+WantedBy=multi-user.target

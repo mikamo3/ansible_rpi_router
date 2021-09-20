@@ -1,0 +1,7 @@
+---
+- name: configure
+  timezone:
+    name: "{{ timezone }}"
+  tags:
+    - system
+    - timezone

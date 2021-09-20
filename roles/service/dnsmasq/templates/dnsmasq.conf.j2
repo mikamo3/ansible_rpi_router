@@ -1,0 +1,20 @@
+addn-hosts=/etc/hosts-dnsmasq.conf
+listen-address={{ network.address }}
+interface={{ network.interface.bridge }}
+bind-interfaces
+domain-needed
+bogus-priv
+local=/mikamosrv.org/
+dhcp-range={{ dnsmasq.dhcp.range }}
+dhcp-option=option:router,{{ network.address }}
+
+dhcp-option=option:ntp-server,{{ network.ntp }}
+dhcp-option=option:dns-server,{{ network.dns }}
+dhcp-option=option:netmask,{{ network.subnetmask }}
+{% for host in secret.dnsmasq.dhcp.hosts %}
+dhcp-host={{ host.mac }},{{ host.ip }}
+{% endfor %}
+
+server=127.0.0.1#{{ dnscrypt.port }}
+no-resolv
+proxy-dnssec

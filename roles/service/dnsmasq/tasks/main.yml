@@ -1,0 +1,30 @@
+---
+- block:
+    - name: install
+      pacman:
+        name: dnsmasq
+    - name: configure
+      template:
+        src: "{{ item }}.j2"
+        dest: "/etc/{{ item }}"
+        mode: "0644"
+      with_items:
+        - dnsmasq.conf
+        - hosts-dnsmasq.conf
+    - name: create override directory
+      file:
+        path: /etc/systemd/system/dnsmasq.service.d
+        state: directory
+        mode: "0755"
+    - name: override dnsmasq.service
+      copy:
+        src: override.conf
+        dest: /etc/systemd/system/dnsmasq.service.d/override.conf
+        mode: "0644"
+    - name: enable
+      systemd:
+        name: dnsmasq
+        enabled: yes
+  tags:
+    - service
+    - dnsmasq

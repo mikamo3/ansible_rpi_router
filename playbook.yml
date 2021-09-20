@@ -1,0 +1,25 @@
+---
+- hosts:
+    - all
+  gather_facts: yes
+  remote_user: ansible
+  become: yes
+  roles:
+    - role: system/user
+    - role: system/host
+    - role: system/vconsole
+    - role: system/timezone
+    - role: system/locale
+    - role: system/package
+    - role: system/sysctl
+
+    - role: service/networkd
+    - role: service/chrony
+    - role: service/dhcpcd
+    - role: service/dnscrypt_proxy
+    - role: service/dnsmasq
+    - role: service/resolved
+    - role: service/radvd
+    - role: service/nftables
+    - role: service/ndppd
+    - role: service/sshd

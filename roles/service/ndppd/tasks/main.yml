@@ -1,0 +1,48 @@
+---
+- block:
+    - name: check installed
+      stat:
+        path: /usr/local/sbin/ndppd
+      register: ndppd_bin
+    - name: install
+      block:
+        - name: make working dir
+          tempfile:
+            state: directory
+          register: temp_dir
+        - name: clone source
+          git:
+            repo: "https://github.com/DanielAdolfsson/ndppd.git"
+            dest: "{{ temp_dir.path }}"
+            version: "{{ ndppd.branch }}"
+        - name: make all
+          make:
+            chdir: "{{ temp_dir.path }}"
+            target: all
+        - name: make install
+          make:
+            chdir: "{{ temp_dir.path }}"
+            target: install
+        - name: clean
+          file:
+            path: "{{ temp_dir.path }}"
+            state: absent
+          when: temp_dir.path is defined
+      when: not ndppd_bin.stat.exists
+    - name: copy service
+      copy:
+        src: ndppd.service
+        dest: "/usr/lib/systemd/system/ndppd.service"
+        mode: "0644"
+    - name: configure
+      template:
+        src: ndppd.conf.j2
+        dest: "/etc/ndppd.conf"
+        mode: "0644"
+    - name: service
+      service:
+        name: ndppd.service
+        enabled: yes
+  tags:
+    - service
+    - ndppd

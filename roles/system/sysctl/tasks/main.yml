@@ -1,0 +1,12 @@
+---
+- name: configure
+  template:
+    src: "{{ item }}.j2"
+    dest: "/etc/sysctl.d/{{ item }}"
+    mode: "0644"
+  with_items:
+    - 10-enable-forwarding.conf
+    - 10-accept-ra.conf
+  tags:
+    - system
+    - sysctl

@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+DEV_COUNT=$(ip a|grep -c -e  '\d\{0,\}:\s*{{network.interface.ip6tunnel}}')
+if [[ $DEV_COUNT != "0" ]]; then
+  echo "
+route del default
+link set dev {{network.interface.ip6tunnel}} down
+tunnel del {{network.interface.ip6tunnel}}" > /var/tmp/ip6tunnel_down
+else
+  echo "
+route del default"> /var/tmp/ip6tunnel_down
+fi
