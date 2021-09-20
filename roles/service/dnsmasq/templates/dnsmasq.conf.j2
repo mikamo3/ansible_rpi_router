@@ -1,16 +1,16 @@
 addn-hosts=/etc/hosts-dnsmasq.conf
-listen-address={{ network.address }}
-interface={{ network.interface.bridge }}
+listen-address={{ ipv4.address }}
+interface={{ interface.bridge }}
 bind-interfaces
 domain-needed
 bogus-priv
 local=/mikamosrv.org/
 dhcp-range={{ dnsmasq.dhcp.range }}
-dhcp-option=option:router,{{ network.address }}
+dhcp-option=option:router,{{ ipv4.address }}
 
-dhcp-option=option:ntp-server,{{ network.ntp }}
-dhcp-option=option:dns-server,{{ network.dns }}
-dhcp-option=option:netmask,{{ network.subnetmask }}
+dhcp-option=option:ntp-server,{{ ipv4.address }}
+dhcp-option=option:dns-server,{{ ipv4.address }}
+dhcp-option=option:netmask,{{ ipv4.subnetmask }}
 {% for host in secret.dnsmasq.dhcp.hosts %}
 dhcp-host={{ host.mac }},{{ host.ip }}
 {% endfor %}

@@ -5,13 +5,13 @@ table inet filter {
     ip6 nexthdr icmpv6 icmpv6 type { echo-request,destination-unreachable, packet-too-big, time-exceeded, parameter-problem, nd-router-advert, nd-neighbor-solicit, nd-neighbor-advert } accept
     ip protocol icmp icmp type { echo-request,destination-unreachable, router-advertisement, time-exceeded, parameter-problem } accept
     iifname "lo" accept
-    iifname "{{ network.interface.bridge }}" accept
+    iifname "{{ interface.bridge }}" accept
   }
   chain forward {
     type filter hook forward priority filter; policy drop;
     ct state { established, related } accept
     ct state invalid drop
     ip6 nexthdr ipv6-icmp icmpv6 type { destination-unreachable, packet-too-big, time-exceeded, parameter-problem, echo-request, nd-router-advert, nd-neighbor-solicit, nd-neighbor-advert } accept
-    iifname "{{ network.interface.bridge }}" accept
+    iifname "{{ interface.bridge }}" accept
   }
 }

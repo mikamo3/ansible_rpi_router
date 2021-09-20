@@ -6,10 +6,12 @@
         state: absent
       with_items:
         - eth.network
+        - en.network
     - name: create override directory
       file:
         path: /etc/systemd/system/systemd-networkd.service.d
         state: directory
+        mode: "0755"
     - name: override systemd-networkd.service
       copy:
         src: override.conf

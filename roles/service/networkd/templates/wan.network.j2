@@ -1,5 +1,5 @@
 [Match]
-Name={{ network.interface.wan }}
+Name={{ interface.wan }}
 
 [Link]
 RequiredForOnline=yes
@@ -7,7 +7,7 @@ RequiredForOnline=yes
 [Network]
 DHCP=no
 DNSSEC=no
-DNS={{ network.dns }}
+DNS={{ dnsserver_address }}
 IPv6AcceptRA=yes
 Address={{ secret.ip6address }}/64
-Tunnel=ip6tun
+Tunnel={{ interface.ip6tunnel }}

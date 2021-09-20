@@ -1,15 +1,12 @@
 ipv4:
-  router_address: 192.168.100.1
+  address: 192.168.100.1
   networkaddress: 192.168.100.0
   subnetmask: 255.255.255.0
   prefix: 24
 
 ipv6:
   uniquelocaladdress: fd00::1
-  ipv6_prefix: 64
-
-ntpserver_address: 192.168.100.1
-dnsserver_address: 192.168.100.1
+  prefix: 64
 
 interface:
   bridge: br0
@@ -21,7 +18,9 @@ dnscrypt:
   port: 15353
   servers:
     - cloudflare
+    - cloudflare-family-ipv6
     - google
+    - google-ipv6
 
 dnsmasq:
   dhcp:

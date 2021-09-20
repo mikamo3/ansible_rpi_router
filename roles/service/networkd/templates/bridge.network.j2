@@ -1,10 +1,10 @@
 [Match]
-Name={{ network.interface.bridge }}
+Name={{ interface.bridge }}
 
 [Link]
 RequiredForOnline=yes
 
 [Network]
-Address={{ network.address }}/{{ network.subnet }}
-Address={{ network.ipv6address }}/{{ network.ipv6subnet }}
-DNS={{ network.dns }}
+Address={{ ipv4.address }}/{{ ipv4.prefix }}
+Address={{ ipv6.uniquelocaladdress }}/{{ ipv6.prefix }}
+DNS={{ dnsserver_address }}

@@ -17,4 +17,5 @@
         enabled: yes
   tags:
     - service
+    - dns
     - dnscrypt_proxy

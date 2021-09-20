@@ -12,6 +12,7 @@
       file:
         path: /etc/systemd/system/sshd.service.d
         state: directory
+        mode: "0755"
     - name: override sshd.service
       copy:
         src: override.conf

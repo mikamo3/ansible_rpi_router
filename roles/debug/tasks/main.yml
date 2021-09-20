@@ -1,0 +1,10 @@
+---
+- name: ansible_facts
+  debug: var=ansible_facts
+
+- name: ansible_facts
+  debug: var=ansible_facts.architecture
+
+- name: conf
+  debug: var=secret
+  tags: debug

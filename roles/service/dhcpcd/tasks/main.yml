@@ -10,4 +10,5 @@
       when: "'dhcpcd' in services"
   tags:
     - service
+    - dhcp
     - dhcpcd
