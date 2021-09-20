@@ -7,7 +7,7 @@ RequiredForOnline=yes
 [Network]
 DHCP=no
 DNSSEC=no
-DNS={{ dnsserver_address }}
+DNS={{ ipv4.address }}
 IPv6AcceptRA=yes
 Address={{ secret.ip6address }}/64
 Tunnel={{ interface.ip6tunnel }}
