@@ -10,6 +10,7 @@
     - role: system/vconsole
     - role: system/timezone
     - role: system/locale
+    - role: system/makepkg
     - role: system/package
     - role: system/sysctl
 
@@ -23,3 +24,4 @@
     - role: service/nftables
     - role: service/ndppd
     - role: service/sshd
+    - role: service/monitoring

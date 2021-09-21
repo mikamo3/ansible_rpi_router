@@ -1,0 +1,9 @@
+[Unit]
+Description=Run tc_check_update
+
+[Timer]
+OnBootSec=30sec
+OnUnitActiveSec=6hour
+
+[Install]
+WantedBy=timers.target

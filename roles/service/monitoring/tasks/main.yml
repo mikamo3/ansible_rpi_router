@@ -1,0 +1,56 @@
+---
+- block:
+    - name: install prometheus
+      pacman:
+        name:
+          - prometheus-node-exporter
+          - prometheus
+    - name: install exporter from aur
+      become: yes
+      become_user: aur
+      kewlfft.aur.aur:
+        name: prometheus-dnsmasq-exporter-git
+    - name: configure
+      copy:
+        src: prometheus.yml
+        dest: /etc/prometheus/prometheus.yml
+        mode: "0644"
+
+    - name: install grafana
+      become: yes
+      become_user: aur
+      kewlfft.aur.aur:
+        name: grafana-bin
+    - name: create text collector directory
+      file:
+        path: /usr/local/node_exporter
+        state: directory
+        mode: "0755"
+    - name: copy text collector scripts
+      copy:
+        src: "{{ item }}"
+        dest: "/usr/local/bin/{{ item }}"
+        mode: "0755"
+      with_items:
+        - tc_check_update
+    - name: copy service
+      copy:
+        src: "{{ item }}"
+        dest: /etc/systemd/system/{{ item }}
+        mode: "0644"
+      with_items:
+        - tc_check_update.service
+        - tc_check_update.timer
+    - name: enable
+      service:
+        name: "{{ item }}"
+        enabled: yes
+      with_items:
+        - prometheus
+        - prometheus-node-exporter
+        - dnsmasq_exporter
+        - grafana
+        - tc_check_update.timer
+  tags:
+    - service
+    - monitoring

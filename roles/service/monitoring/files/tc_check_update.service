@@ -1,0 +1,8 @@
+[Unit]
+Description=output update count for node exporter
+RefuseManualStart=no
+RefuseManualStop=yes
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c "/usr/local/bin/tc_check_update >> /usr/local/node_exporter/check_update.prom.$$ && mv /usr/local/node_exporter/check_update.prom.$$ /usr/local/node_exporter/check_update.prom"

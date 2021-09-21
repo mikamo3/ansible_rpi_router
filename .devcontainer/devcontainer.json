@@ -1,5 +1,5 @@
 {
-  "name": "arch-ansible",
+  "name": "ansible-rpi-router",
   "dockerFile": "Dockerfile",
   "extensions": [
     "tomaciazek.ansible",

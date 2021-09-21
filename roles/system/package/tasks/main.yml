@@ -23,7 +23,19 @@
           - vim
           - tcpdump
           - iperf
+    - name: Create the `aur_builder` user
+      ansible.builtin.user:
+        name: aur
+        create_home: yes
+        group: wheel
 
+    - name: Allow the `aur_builder` user to run `sudo pacman` without a password
+      ansible.builtin.lineinfile:
+        path: /etc/sudoers.d/11-install-aur_builder
+        line: "aur ALL=(ALL) NOPASSWD: /usr/bin/pacman"
+        mode: "0440"
+        create: yes
+        validate: "visudo -cf %s"
   tags:
     - system
     - package
