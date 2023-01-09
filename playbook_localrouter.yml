@@ -13,16 +13,9 @@
     - role: system/makepkg
     - role: system/package
     - role: system/sysctl/forwarding
-    - role: system/sysctl/accept_ra
 
-    - role: service/networkd/internet
-    - role: service/chrony
+    - role: service/networkd/local_router
     - role: service/dhcpcd
-    - role: service/dnscrypt_proxy
-    - role: service/dnsmasq
-    - role: service/resolved
-    - role: service/radvd
-    - role: service/nftables
-    - role: service/ndppd
+    - role: service/dhcpd
     - role: service/sshd
-    - role: service/monitoring
+

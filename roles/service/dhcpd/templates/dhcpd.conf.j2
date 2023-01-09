@@ -1,0 +1,6 @@
+option domain-name-servers 8.8.8.8, 8.8.4.4;
+option subnet-mask {{ ipv4.subnetmask }};
+option routers {{ ipv4.address }};
+subnet {{ ipv4.networkaddress }} netmask {{ ipv4.subnetmask }} {
+  range {{ dhcpd.range_from }} {{ dhcpd.range_to }};
+}

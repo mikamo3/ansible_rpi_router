@@ -1,0 +1,21 @@
+---
+- block:
+    - name: configure
+      template:
+        src: "{{ item }}.j2"
+        dest: "/etc/sysctl.d/{{ item }}"
+        mode: "0644"
+      with_items:
+        - 10-accept-ra.conf
+    - name: add service
+      copy:
+        src: enable_accept_ra.service
+        dest: /etc/systemd/system/enable_accept_ra.service
+        mode: "0644"
+    - name: enable
+      service:
+        name: enable_accept_ra
+        enabled: yes
+  tags:
+    - system
+    - sysctl

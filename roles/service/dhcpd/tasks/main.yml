@@ -1,0 +1,19 @@
+---
+- block:
+    - name: install
+      pacman:
+        name: dhcp
+    - name: configure
+      template:
+        src: "dhcpd.conf.j2"
+        dest: "/etc/dhcpd.conf"
+        mode: "0644"
+    - name: enable
+      systemd:
+        name: dhcpd4
+        enabled: yes
+  tags:
+    - service
+    - dhcpd
+    - dns
+    - dhcp

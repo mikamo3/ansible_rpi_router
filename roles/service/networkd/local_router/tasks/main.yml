@@ -23,12 +23,7 @@
         dest: "/etc/systemd/network/{{ item }}"
         mode: "0644"
       with_items:
-        - bridge.netdev
-        - bridge.network
         - lan.network
-        - wan.network
-        - tunnel.network
-        - tunnel.netdev
     - name: enable
       service:
         name: systemd-networkd.service

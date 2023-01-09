@@ -5,7 +5,7 @@ proxy {{ interface.wan }} {
    keepalive yes
    retries 3
    ttl 30000
-   rule {{ secret.ip6address }} {
+   rule {{ secret.ip6networkaddress }} {
       iface {{ interface.bridge }}
    }
 }
