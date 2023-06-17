@@ -18,4 +18,5 @@
     - role: service/dhcpcd
     - role: service/dhcpd
     - role: service/sshd
+    - role: smarthome
 

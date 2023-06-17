@@ -1,0 +1,13 @@
+---
+- block:
+  - name: install
+    pacman: 
+      name: python,python-pip,bluez,bluez-libs
+
+  - name: install(aur)
+    become: yes
+    become_user: aur
+    kewlfft.aur.aur:
+      name: nodejs-node-red, bluez-utils-compat
+  tags:
+    - smarthome

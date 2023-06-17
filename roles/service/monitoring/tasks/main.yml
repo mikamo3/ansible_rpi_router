@@ -5,11 +5,6 @@
         name:
           - prometheus-node-exporter
           - prometheus
-    - name: install exporter from aur
-      become: yes
-      become_user: aur
-      kewlfft.aur.aur:
-        name: prometheus-dnsmasq-exporter-git
     - name: configure
       copy:
         src: prometheus.yml
@@ -48,7 +43,6 @@
       with_items:
         - prometheus
         - prometheus-node-exporter
-        - dnsmasq_exporter
         - grafana
         - tc_check_update.timer
   tags:

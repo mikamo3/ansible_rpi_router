@@ -36,6 +36,12 @@
         mode: "0440"
         create: yes
         validate: "visudo -cf %s"
+    - name: install yay
+      become: yes
+      become_user: aur
+      kewlfft.aur.aur:
+        use: makepkg
+        name: yay
   tags:
     - system
     - package
